@@ -21,10 +21,10 @@ function calcularInteres($dias_retraso) {
         if ($dias_retraso <= $row['int_dia1']) {
             $tasa_interes = 0;
             break;
-        }elseif ($dias_retraso >= $row['int_dia1'] & $dias_retraso <= $row['int_dia2']) {
+        }elseif ($dias_retraso >= $row['int_dia1'] & $dias_retraso < $row['int_dia2']) {
             $tasa_interes = $row['int_1'];
             break;
-        } elseif ($dias_retraso >= $row['int_dia2'] & $dias_retraso <= $row['int_dia3']) {
+        } elseif ($dias_retraso >= $row['int_dia2'] & $dias_retraso < $row['int_dia3']) {
             $tasa_interes = $row['int_2'];
             break;
         } else {
@@ -70,7 +70,7 @@ function retraso($registro){
         
     $fecha_emision = strtotime($registro['fac_emision']);
     $fecha_vencimiento = strtotime($registro['fac_vencimiento']);
-    $dias_retraso = round(($fecha_vencimiento - $hoy)  / 86400);
+    $dias_retraso = round(($hoy - $fecha_vencimiento)  / 86400);
     return $dias_retraso;
     
 }
